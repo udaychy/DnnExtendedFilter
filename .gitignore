@@ -1,0 +1,6 @@
+Properties
+__Library.build
+bin
+obj
+packages
+*.suo
