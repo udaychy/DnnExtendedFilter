@@ -3,24 +3,24 @@ This project extends some of the Attributes(mostly used by DNN service framework
 
 The request coming from DNN DesktopModules and Mobile applications need different sets of Auth filters/attributes and these attributes may conflict each other and could not be used on the same controller.
 
-One bad way is to write the same controller again with different attributes, one for DesktopModules and other for Mobile applications.
-Other way is to extend these attributes which can Authenticate the requests coming from both DesktopModules and Mobile applications, which is shown here.
+One way is to write the duplicate controllers for mobile applications with different attributes but this will make the controller class difficult to maintain.
+In this project, a `TestController` with extended attributes authenticates the requests coming from both DesktopModules and Mobile applications.
 
 #### Extended Attributes are : 
 
 ### 1. CustomModuleAuthorizeAttribute:
 - Extends `DnnModuleAuthorizeAttribute`   
-- Only the `SkipAuthorization` method is overrided, 
+- Only the `SkipAuthorization` method is overridden, 
     which checks if the current request is JWT Authenticated then return true
     otherwise return the result of `SkipAuthorization` method of its base class ie.`DnnModuleAuthorizeAttribute`
 ### 2. CustomSupportedModulesAttribute:
 - Extends `SupportedModulesAttribute`   
-- Only the `SkipAuthorization` method is overrided, 
+- Only the `SkipAuthorization` method is overridden, 
     which checks if the current request is JWT Authenticated then return true
     otherwise return the result of `SkipAuthorization` method of its base class     ie.`SupportedModulesAttribute`
 ### 3. CustomValidateAntiForgeryTokenAttribute:
 - Extends `ValidateAntiForgeryTokenAttribute`   
-- Only the `IsAuthorized` method is overrided, 
+- Only the `IsAuthorized` method is overridden, 
     which checks if the current request is JWT Authenticated then return true
     otherwise return the result of `SkipAuthorization` method of its base class     ie.`ValidateAntiForgeryTokenAttribute`
 ### 4. JwtAuthorizeAttribute:
